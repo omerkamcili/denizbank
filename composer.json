@@ -1,0 +1,12 @@
+{
+  "name": "omerkamcili/denizbank",
+  "description": "Denizbank 3D Ödeme",
+  "authors": [
+    {
+      "name": "Ömer Kamçılı",
+      "email": "omerkamcili@gmail.com"
+    }
+  ],
+  "minimum-stability": "dev",
+  "require": {}
+}
