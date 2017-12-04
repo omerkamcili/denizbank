@@ -53,10 +53,16 @@ class DenizbankPay3d{
     public $currency = '949';
 
 
+    // 3D Pay form url
+    public $pay3d_url = 'https://sanaltest.denizbank.com/mpi/Default.aspx';
+
+
+    /**
+     * DenizbankPay3d constructor.
+     */
     public function __construct(){
 
         $this->rand = microtime();
-        $this->pay3d_url = 'https://sanaltest.denizbank.com/mpi/Default.aspx';
 
     }
 
@@ -296,6 +302,14 @@ class DenizbankPay3d{
 
         return array('error' => $error, 'message' => (!$message ? $messages[$error] : $message));
 
+    }
+
+    /**
+     * @param string $pay3d_url
+     */
+    public function setPay3dUrl($pay3d_url)
+    {
+        $this->pay3d_url = $pay3d_url;
     }
 
 }
