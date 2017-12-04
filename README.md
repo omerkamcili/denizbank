@@ -1,5 +1,10 @@
 # Denizbank
-Denizbank 3D Pay
+Denizbank 3D Pay Php Sanal Pos Entegrasyonu
+
+### Composer install
+```php
+composer require omerkamcili/denizbank
+```
 
 
 ### 3D Pay Örnek Kullanım
