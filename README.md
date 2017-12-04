@@ -1,10 +1,10 @@
 # Denizbank
 Denizbank 3D Pay
 
-```php
-use OmerKamcili\DenizBank\DenizbankPay3d;
 
 ### 3D Pay Örnek Kullanım
+```php
+use OmerKamcili\DenizBank\DenizbankPay3d;
 
 $payment = new DenizbankPay3d();
 $payment->setShopCode('3123');
