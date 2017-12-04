@@ -17,5 +17,20 @@ $payment->setAmount(20);
 $payment->setOrderId(3388483);
 // Form oluşturuluyor
 $result = $payment->getPaid('5200190046477986', '319', '0121', '1');
+echo $result;
+
+```
+
+
+### Result Örnek Kullanım
+
+```php
+// 3D işlemi sonrasnda banka post dönüyor, bu dönen postu result methoduna parametre olarak veriyoruz.
+
+$payment = new PaymentDenizbank();
+$result = $payment->result($_POST);
+
+// Array döndürüyor, işlem başarılıysa error => '00' dönecek
+print_r($result);
 
 ```
