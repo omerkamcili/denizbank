@@ -11,10 +11,11 @@ namespace OmerKamcili\DenizBank;
 
 /**
  * @property string pay3d_url
- * @property int rand
+ * @property int    rand
  */
 
-class DenizbankPay3d{
+class DenizbankPay3d
+{
 
 
     // Üye işyeri numaranız
@@ -60,61 +61,64 @@ class DenizbankPay3d{
     /**
      * DenizbankPay3d constructor.
      */
-    public function __construct(){
+    public function __construct()
+    {
 
         $this->rand = microtime();
 
     }
 
     /**
-     * @param $card_number - Kredi kartı numarası
-     * @param $security_code - Cvv numarası
+     * @param $card_number     - Kredi kartı numarası
+     * @param $security_code   - Cvv numarası
      * @param $expiration_date - Kredi kartı son kullanma tarihi,iki basamak, ay yıl (MMYY)
-     * @param $card_type - Kredi kartı tipi, Visa için 0, Master kart için 1
+     * @param $card_type       - Kredi kartı tipi, Visa için 0, Master kart için 1
      * @param $bonus
+     *
      * @return string - redirecting html form
      */
-    public function getPaid($card_number, $security_code, $expiration_date, $card_type, $bonus=''){
+    public function getPaid($card_number, $security_code, $expiration_date, $card_type, $bonus = '')
+    {
 
         $hash = $this->createHash();
 
         $response = '<html><body onload="document.payment_form.submit()">';
 
-        $response .= '<form method="post" name="payment_form" action="' . $this->pay3d_url . '">' . "\r\n";
+        $response .= '<form method="post" name="payment_form" action="'.$this->pay3d_url.'">'."\r\n";
 
-        $response .= '<input type="hidden" name="Pan" value="' . $card_number . '"/>' . "\r\n";
+        $response .= '<input type="hidden" name="Pan" value="'.$card_number.'"/>'."\r\n";
 
-        $response .= '<input type="hidden" name="Cvv2" value="' . $security_code . '"/>' . "\r\n";
+        $response .= '<input type="hidden" name="Cvv2" value="'.$security_code.'"/>'."\r\n";
 
-        $response .= '<input type="hidden" name="Expiry" value="' . $expiration_date . '"/>' . "\r\n";
+        $response .= '<input type="hidden" name="Expiry" value="'.$expiration_date.'"/>'."\r\n";
 
-        $response .= '<input type="hidden" name="BonusAmount" value="' . $bonus . '"/>' . "\r\n";
+        $response .= '<input type="hidden" name="BonusAmount" value="'.$bonus.'"/>'."\r\n";
 
-        $response .= '<input type="hidden" name="CardType" value="' . $card_type . '"/>' . "\r\n";
+        $response .= '<input type="hidden" name="CardType" value="'.$card_type.'"/>'."\r\n";
 
-        $response .= '<input type="hidden" name="ShopCode" value="' . $this->shop_code . '">' . "\r\n";
+        $response .= '<input type="hidden" name="ShopCode" value="'.$this->shop_code.'">'."\r\n";
 
-        $response .= '<input type="hidden" name="PurchAmount" value="' . $this->amount . '">' . "\r\n";
+        $response .= '<input type="hidden" name="PurchAmount" value="'.$this->amount.'">'."\r\n";
 
-        $response .= '<input type="hidden" name="Currency" value="' . $this->currency . '">' . "\r\n";
+        $response .= '<input type="hidden" name="Currency" value="'.$this->currency.'">'."\r\n";
 
-        $response .= '<input type="hidden" name="OrderId" value="' . $this->order_id . '">' . "\r\n";
+        $response .= '<input type="hidden" name="OrderId" value="'.$this->order_id.'">'."\r\n";
 
-        $response .= '<input type="hidden" name="OkUrl" value="' . $this->success_url . '">' . "\r\n";
+        $response .= '<input type="hidden" name="OkUrl" value="'.$this->success_url.'">'."\r\n";
 
-        $response .= '<input type="hidden" name="FailUrl" value="' . $this->fail_url . '">' . "\r\n";
+        $response .= '<input type="hidden" name="FailUrl" value="'.$this->fail_url.'">'."\r\n";
 
-        $response .= '<input type="hidden" name="Rnd" value="' . $this->rand . '" >' . "\r\n";
+        $response .= '<input type="hidden" name="Rnd" value="'.$this->rand.'" >'."\r\n";
 
-        $response .= '<input type="hidden" name="Hash" value="' . $hash . '" >' . "\r\n";
+        $response .= '<input type="hidden" name="Hash" value="'.$hash.'" >'."\r\n";
 
-        $response .= '<input type="hidden" name="TxnType" value="' . $this->txn_type . '" />' . "\r\n";
+        $response .= '<input type="hidden" name="TxnType" value="'.$this->txn_type.'" />'."\r\n";
 
-        $response .= '<input type="hidden" name="InstallmentCount" value="' . $this->installment . '" />' . "\r\n";
+        $response .= '<input type="hidden" name="InstallmentCount" value="'.$this->installment.'" />'."\r\n";
 
-        $response .= '<input type="hidden" name="SecureType" value="3DPay" >' . "\r\n";
+        $response .= '<input type="hidden" name="SecureType" value="3DPay" >'."\r\n";
 
-        $response .= '<input type="hidden" name="Lang" value="tr">' . "\r\n";
+        $response .= '<input type="hidden" name="Lang" value="tr">'."\r\n";
 
         $response .= '</body></html>';
 
@@ -124,9 +128,11 @@ class DenizbankPay3d{
 
     /**
      * @param array $post
+     *
      * @return array
      */
-    public function result(array $post){
+    public function result(array $post)
+    {
 
 
         $hashparams = $post["HASHPARAMS"];
@@ -136,48 +142,47 @@ class DenizbankPay3d{
         $index1 = 0;
         $index2 = 0;
 
-        while($index1 < strlen($hashparams))
-        {
-            $index2 = strpos($hashparams,":",$index1);
+        while ($index1 < strlen($hashparams)) {
+            $index2 = strpos($hashparams, ":", $index1);
 
-            $vl = $_POST[substr($hashparams,$index1,$index2- $index1)];
+            $vl = $_POST[substr($hashparams, $index1, $index2 - $index1)];
 
-            if($vl == null){
+            if ($vl == null) {
 
                 $vl = "";
 
             }
 
-            $paramsval = $paramsval . $vl;
+            $paramsval = $paramsval.$vl;
 
             $index1 = $index2 + 1;
         }
 
 
-        $hashval = $paramsval . $this->merchant_pass;
-        $hash = base64_encode(pack('H*',sha1($hashval)));
+        $hashval = $paramsval.$this->merchant_pass;
+        $hash = base64_encode(pack('H*', sha1($hashval)));
 
-        if($paramsval != $hashparamsval || $hashparam != $hash){
+        if ($paramsval != $hashparamsval || $hashparam != $hash) {
 
             return $this->response('03');
 
-        }else{
+        } else {
 
-            if(in_array($post["3DStatus"], array(1,2,3,4))){
+            if (in_array($post["3DStatus"], array(1, 2, 3, 4))) {
 
 
-                if($post['ProcReturnCode'] == '00'){
+                if ($post['ProcReturnCode'] == '00') {
 
                     return $this->response('00');
 
-                }else{
+                } else {
 
                     return $this->response('02', $post['ErrorMessage']);
 
                 }
 
 
-            }else{
+            } else {
 
 
                 $this->response('01', $post["ErrorMessage"]);
@@ -196,19 +201,21 @@ class DenizbankPay3d{
     /**
      * @return string
      */
-    private function createHash(){
+    private function createHash()
+    {
 
-        $hash = $this->shop_code .
-                $this->order_id .
-                $this->amount .
-                $this->success_url .
-                $this->fail_url .
-                $this->txn_type .
-                $this->installment .
-                $this->rand .
-                $this->merchant_pass;
+        $hash = $this->shop_code.
+            $this->order_id.
+            $this->amount.
+            $this->success_url.
+            $this->fail_url.
+            $this->txn_type.
+            $this->installment.
+            $this->rand.
+            $this->merchant_pass;
 
-        $hash = base64_encode(pack('H*',sha1($hash)));
+        $hash = base64_encode(pack('H*', sha1($hash)));
+
         return $hash;
 
     }
@@ -288,11 +295,13 @@ class DenizbankPay3d{
     /**
      * @param $error hata kodu
      * @param $message
+     *
      * @return array Burası hatasonuçlarını kısaltmamız için,
      * Burası hatasonuçlarını kısaltmamız için,
      * Birçok sonuç dönüyor fakat bizim için önemli dönmemiz gereken mesaj
      */
-    private function response($error, $message=null){
+    private function response($error, $message = null)
+    {
 
         $messages['00'] = 'Başarılı';
         $messages['01'] = '3D İşlemi Başarısız';
@@ -300,7 +309,7 @@ class DenizbankPay3d{
         $messages['03'] = 'Dijital İmza Hatalı';
         $messages['04'] = 'Tanımlanmayan Hata';
 
-        return array('error' => $error, 'message' => (!$message ? $messages[$error] : $message));
+        return array('error' => $error, 'message' => (! $message ? $messages[$error] : $message));
 
     }
 
