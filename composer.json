@@ -7,6 +7,9 @@
       "email": "omerkamcili@gmail.com"
     }
   ],
+  "psr-4": {
+    "OmerKamcili\\": "src/"
+  },
   "minimum-stability": "dev",
   "require": {}
 }
