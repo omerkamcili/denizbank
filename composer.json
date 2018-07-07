@@ -8,7 +8,7 @@
     }
   ],
   "psr-4": {
-    "OmerKamcili\\": "src/"
+    "OmerKamcili\\DenizBank\\": "src/"
   },
   "minimum-stability": "dev",
   "require": {}
