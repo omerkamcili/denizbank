@@ -7,8 +7,10 @@
       "email": "omerkamcili@gmail.com"
     }
   ],
-  "psr-4": {
-    "OmerKamcili\\DenizBank\\": "src/"
+  "autoload": {
+    "psr-4": {
+      "OmerKamcili\\DenizBank\\": "src/"
+    }
   },
   "minimum-stability": "dev",
   "require": {}
