@@ -145,7 +145,7 @@ class DenizbankPay3d
         while ($index1 < strlen($hashparams)) {
             $index2 = strpos($hashparams, ":", $index1);
 
-            $vl = $_POST[substr($hashparams, $index1, $index2 - $index1)];
+            $vl = $post[substr($hashparams, $index1, $index2 - $index1)];
 
             if ($vl == null) {
 
