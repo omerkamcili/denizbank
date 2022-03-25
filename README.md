@@ -33,6 +33,7 @@ echo $result;
 // 3D işlemi sonrasnda banka post dönüyor, bu dönen postu result methoduna parametre olarak veriyoruz.
 
 $payment = new PaymentDenizbank();
+$payment->setMerchantPass('gDg1N');
 $result = $payment->result($_POST);
 
 // Array döndürüyor, işlem başarılıysa error => '00' dönecek
